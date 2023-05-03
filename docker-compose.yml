@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+  mongodb-data:
+services:
+  mongo:
+    container_name: ${NAME}
+    image: mongo:${MONGO_VERSION}
+    restart: ${VALUE}
+    command: ${COMMAND}
+    ports:
+      - ${PORT_SYSTEM}:${PORT_DOCKER}
+    volumes:
+      - ${MONGO_DATA}:${MONGO_DATA_DOCKER}
+      - ${MONGO_BACKUP}:${MONGO_BACKUP_DOCKER}
+      - "/etc/localtime:/etc/localtime:ro"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
